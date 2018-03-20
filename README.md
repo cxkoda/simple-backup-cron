@@ -1,11 +1,10 @@
 simple-backup-cron
 ==================
 
-A simple bash script to backup remote databases and folders.
+A simple bash script to backup remote databases and folders, forked from [marcaube/simple-backup-cron](https://github.com/marcaube/simple-backup-cron).
 
-This is a low-tech script I wrote a while ago to keep 10 days of backups of 
-production assets on my workstation. I use it to backup [UGC](http://en.wikipedia.org/wiki/User-generated_content)
-like uploaded images and also MySQL dumps.
+This is a low-tech skeleton script to perform a generic backup task keeping a history of 14 days.
+I use this script mainly to backup a git repository from a somewhat unsave environment.
 
 
 ## Usage
@@ -18,24 +17,14 @@ Copy the script to the computer where you want to store the backups and configur
 # Where to save the backups on your local machine (absolute path)
 BACKUPS=~/Backups
 
-# The server (user@server.com) to SSH to, you have to log-in without password using a public-key
-SERVER=user@server.com
-
-# A list of databases to backup
-DATABASES=("database_1" "database_2")
-
-# MySQL database user and password (has to be able to access every databases to backup)
-DATABASE_USER=user
-DATABASE_PASSWORD=password
-
-# A list of folders to backup
-FOLDERS=("/home/user/www/website.com/uploads" "/home/user/www/website.com/assets")
-
 # The naming used for backup folders (i.e. $(date +%Y-%m-%d) or $(date +%Y-%m-%d-%H.%M.%S))
 FOLDER=$(date +%Y-%m-%d)
 
 # How many days before backups are "stale" and ready to be trashed
-MAXAGE=10
+MAXAGE=14
+
+# backup commands, concatenate multiple commands with && (e.g. git clone ... && wget ...)
+BACKCOM=""
 
 # END CONFIG ------------------------------------------------------------------
 ```
